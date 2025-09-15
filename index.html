@@ -868,49 +868,77 @@
             items.classList.toggle('active');
             arrow.style.transform = items.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
         }
-        const burgerMenu = document.querySelector('.burger-menu');
-        const mobileNav = document.createElement('div');
-        mobileNav.className = 'mobile-nav';
 
-        const desktopNav = document.querySelector('.nav').cloneNode(true);
-        mobileNav.appendChild(desktopNav);
+        // Исправленный код для бургер-меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerMenu = document.querySelector('.burger-menu');
+            const mobileNav = document.createElement('div');
+            mobileNav.className = 'mobile-nav';
 
-        const closeButton = document.createElement('button');
-        closeButton.className = 'close-menu';
-        closeButton.innerHTML = '×';
-        closeButton.addEventListener('click', closeMobileMenu);
-        mobileNav.appendChild(closeButton);
+            // Создаем навигацию для мобильного меню
+            const navLinks = [
+                { href: '#why', text: 'Почему мы' },
+                { href: '#services', text: 'Услуги' },
+                { href: '#pricing', text: 'Цены' },
+                { href: '#reviews', text: 'Отзывы' },
+                { href: '#about', text: 'О нас' },
+                { href: '#blog', text: 'Блог' },
+                { href: '#contacts', text: 'Контакты' }
+            ];
 
-        document.body.appendChild(mobileNav);
+            // Добавляем ссылки в мобильное меню
+            navLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.href;
+                a.className = 'nav-link';
+                a.textContent = link.text;
+                a.addEventListener('click', closeMobileMenu);
+                mobileNav.appendChild(a);
+            });
 
-        function openMobileMenu() {
-            mobileNav.classList.add('active');
-            burgerMenu.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            // Добавляем кнопку закрытия
+            const closeButton = document.createElement('button');
+            closeButton.className = 'close-menu';
+            closeButton.innerHTML = '×';
+            closeButton.addEventListener('click', closeMobileMenu);
+            mobileNav.appendChild(closeButton);
 
-        function closeMobileMenu() {
-            mobileNav.classList.remove('active');
-            burgerMenu.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            document.body.appendChild(mobileNav);
 
-        burgerMenu.addEventListener('click', openMobileMenu);
-
-        mobileNav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        mobileNav.addEventListener('click', (e) => {
-            if (e.target === mobileNav) {
-                closeMobileMenu();
+            function openMobileMenu() {
+                mobileNav.classList.add('active');
+                burgerMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-        });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                closeMobileMenu();
+            function closeMobileMenu() {
+                mobileNav.classList.remove('active');
+                burgerMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
+
+            burgerMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            // Закрытие по клику вне меню
+            mobileNav.addEventListener('click', function(e) {
+                if (e.target === mobileNav) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Закрытие по ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
         });
     </script>
     </body>
