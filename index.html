@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Move Medical - Восстановление, которое помогает</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="images/Bg.png" as="image">
 </head>
 <body>
     <header class="header">
@@ -26,6 +27,12 @@
                 <div class="header-contact">
                     <span class="phone">8 775 355 0845</span>
                     <button class="btn-primary">Связаться с нами</button>
+                </div>
+                <div class="burger-menu">
+                <div class="burger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
@@ -861,6 +868,50 @@
             items.classList.toggle('active');
             arrow.style.transform = items.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
         }
+        const burgerMenu = document.querySelector('.burger-menu');
+        const mobileNav = document.createElement('div');
+        mobileNav.className = 'mobile-nav';
+
+        const desktopNav = document.querySelector('.nav').cloneNode(true);
+        mobileNav.appendChild(desktopNav);
+
+        const closeButton = document.createElement('button');
+        closeButton.className = 'close-menu';
+        closeButton.innerHTML = '×';
+        closeButton.addEventListener('click', closeMobileMenu);
+        mobileNav.appendChild(closeButton);
+
+        document.body.appendChild(mobileNav);
+
+        function openMobileMenu() {
+            mobileNav.classList.add('active');
+            burgerMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileNav.classList.remove('active');
+            burgerMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        burgerMenu.addEventListener('click', openMobileMenu);
+
+        mobileNav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target === mobileNav) {
+                closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
     </script>
     </body>
 </html>
