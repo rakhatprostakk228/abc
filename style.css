@@ -2408,6 +2408,10 @@ body {
     -ms-overflow-style: none;
 }
 
+.hero-buttons {
+    overflow-x: visible;
+}
+
 .reviews-navigation::-webkit-scrollbar,
 .social-links::-webkit-scrollbar,
 .hero-buttons::-webkit-scrollbar {
