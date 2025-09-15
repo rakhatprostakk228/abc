@@ -7,18 +7,19 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
-    color: #333;
-    overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку */
+    color: #0C3240;
+    background-color: white;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
 .btn-primary {
-    background: #4AC4C0;
+    background: #128EA8;
     color: white;
     padding: 14px 28px;
     border: none;
@@ -28,13 +29,15 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     text-decoration: none;
-    display: inline-block;
-    white-space: nowrap;
 }
 
 .btn-primary:hover {
-    background: #3BA8A4;
+    background: #0F7A91;
     transform: translateY(-2px);
+}
+
+.text-highlight {
+    color: #128EA8;
 }
 
 .btn-whatsapp {
@@ -47,17 +50,16 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    flex-shrink: 0;
 }
 
 .btn-whatsapp:hover {
-    transform: translateY(2px);
+    transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
 }
 
 .btn-whatsapp img {
-    width: 90px;
-    height: 90px;
+    width: 80px;
+    height: 80px;
 }
 
 .header {
@@ -105,6 +107,20 @@ body {
     gap: 32px;
 }
 
+.hero-text {
+    position: relative;
+    z-index: 3;
+}
+
+.hero-subtitle {
+    color: #128EA8;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
 .nav-link {
     color: #666;
     text-decoration: none;
@@ -130,9 +146,36 @@ body {
 }
 
 .hero {
-    background: #F0F7F7;
-    padding: 120px 0 80px;
+    background: white;
+    padding: 140px 0 80px;
     margin-top: 72px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, white);
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 80%;
+    background: url('images/Bg.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 24px;
+    z-index: 1;
 }
 
 .hero-content {
@@ -140,10 +183,12 @@ body {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 40px;
+    position: relative;
+    z-index: 2;
 }
 
 .hero-subtitle {
-    color: #4AC4C0;
+    color: #128EA8;
     font-size: 26px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -155,17 +200,17 @@ body {
     font-size: 58px;
     font-weight: 700;
     line-height: 1.2;
-    color: #2C5158;
+    color: #0C3240;
     margin-bottom: 24px;
 }
 
 .text-highlight {
-    color: #4AC4C0;
+    color: #128EA8;
 }
 
 .hero-description {
     font-size: 18px;
-    color: #666;
+    color: #0C3240;
     margin-bottom: 32px;
     line-height: 1.6;
 }
@@ -174,19 +219,21 @@ body {
     display: flex;
     align-items: center;
     gap: 16px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .hero-image {
     position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .hero-img {
-    width: 130%;
-    height: 500px;
-    object-fit: cover;
-    object-position: 100% center;
-    border-radius: 20px;
+    width: 200%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 16px;
 }
 
 .why-us {
@@ -197,7 +244,7 @@ body {
 .section-title {
     font-size: 40px;
     font-weight: 700;
-    color: #2C5158;
+    color: #0C3240;
     text-align: center;
     margin-bottom: 60px;
 }
@@ -231,8 +278,20 @@ body {
 .feature-title {
     font-size: 20px;
     font-weight: 600;
-    color: #2C5158;
+   color: #0C3240;
     margin-bottom: 16px;
+}
+
+.feature-title, .service-title, .process-step-title, 
+.pricing-section-title, .review-name, .contact-title,
+.about-title, .blog-title, .team-name, .social-title {
+    color: #0C3240 !important;
+}
+
+.feature-text, .service-description, .process-step-text,
+.pricing-service, .review-text, .contact-description,
+.about-description, .blog-excerpt, .team-position {
+    color: #0C3240;
 }
 
 .feature-text {
@@ -267,7 +326,7 @@ body {
     }
     
     .hero-img {
-        width: 100%;
+        width: 150%;
         height: 400px;
     }
     
@@ -2353,4 +2412,143 @@ body {
 .social-links::-webkit-scrollbar,
 .hero-buttons::-webkit-scrollbar {
     display: none;
+}
+
+/* Бургер меню */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.burger-icon {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger-icon span {
+    height: 3px;
+    width: 100%;
+    background-color: #2C5158;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active .burger-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.burger-menu.active .burger-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active .burger-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+    padding: 80px 20px 20px;
+    transition: left 0.3s ease;
+    overflow-y: auto;
+}
+
+.mobile-nav.active {
+    left: 0;
+}
+
+.mobile-nav .nav-link {
+    display: block;
+    padding: 16px 0;
+    font-size: 18px;
+    color: #2C5158;
+    text-decoration: none;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 500;
+}
+
+.mobile-nav .nav-link:last-child {
+    border-bottom: none;
+}
+
+.mobile-nav .nav-link:hover {
+    color: #4AC4C0;
+}
+
+.close-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #2C5158;
+}
+
+@media (max-width: 1024px) {
+    .burger-menu {
+        display: flex;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .header-contact .phone {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .burger-icon {
+        width: 25px;
+        height: 18px;
+    }
+    
+    .mobile-nav .nav-link {
+        font-size: 16px;
+        padding: 14px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .burger-icon {
+        width: 22px;
+        height: 16px;
+    }
+    
+    .burger-icon span {
+        height: 2px;
+    }
+    
+    .mobile-nav {
+        padding: 70px 16px 16px;
+    }
+    
+    .mobile-nav .nav-link {
+        font-size: 15px;
+        padding: 12px 0;
+    }
+    
+    .close-menu {
+        top: 16px;
+        right: 16px;
+        width: 24px;
+        height: 24px;
+        font-size: 20px;
+    }
 }
